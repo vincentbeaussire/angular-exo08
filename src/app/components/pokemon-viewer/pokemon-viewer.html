@@ -1,0 +1,32 @@
+<div>
+  <h2>Search a Pokemon</h2>
+  <input #inputField type="number" min="1" max="150" [value]="currentId" />
+  <button (click)="searchPokemonById(inputField.value)">Search</button>
+
+  <button (click)="previousPokemon()" [disabled]="currentId <= 1">Previous</button>
+  <button (click)="nextPokemon()" [disabled]="currentId >= maxId">Next</button>
+</div>
+
+<div *ngIf="loading">Loading...</div>
+
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngIf="pokemon">
+  <h3>{{ pokemon.name | uppercase }} (ID : {{ pokemon.id }})</h3>
+  <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name" />
+  <p><strong>Weight :</strong> {{ pokemon.weight / 10 }} kg</p>
+  <p><strong>Height :</strong> {{ pokemon.height / 10 }} m</p>
+
+  <p><strong>Types :</strong>
+    <span *ngFor="let t of pokemon.types; let last = last">
+      {{ t.type.name }}<span *ngIf="!last">, </span>
+    </span>
+  </p>
+
+  <p><strong>Attacks</strong></p>
+  <ul>
+    <li *ngFor="let move of pokemon.moves.slice(0, 5)">
+      {{ move.move.name }}
+    </li>
+  </ul>
+</div>

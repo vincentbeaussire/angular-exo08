@@ -1,0 +1,23 @@
+<div>
+    <div>
+        <h3>{{pokemon.nom}}</h3>
+        <p>{{pokemon.description}}</p>
+        <h4>Types :</h4>
+        @for (type of pokemon.types; track type; let i = $index) {
+            <p>{{type}}</p>
+        }
+    </div>
+
+    <div>
+        <h4>Attaques :</h4>
+        <ul>        
+            @for (attack of pokemon.attacks; track attack; let i = $index) {
+                <li>{{attack.nom}} - {{attack.description}} - {{attack.type}}</li>
+                <li>{{attack.degats}}</li>
+            }
+        </ul>
+    </div>
+    <div>
+        <button class="bg-red-600 text-white" (click)="deletePokemon()">Supprimer le pokemon</button>
+    </div>
+</div>
